@@ -9,6 +9,7 @@ import AddNote from "./Components/AddNote/AddNote";
 
 function App() {
   const [notes, setNotes] = useState([...JSON.parse(localStorage.getItem("react-notes-app-data") || "[]")]);
+  
   const addNote = (text) => {
     // console.log(text);
     const date = new Date();
@@ -23,6 +24,7 @@ function App() {
     setToggle(!toggle)
 
   };
+
   const deleteNote = (id) => {
     const newNotes = notes.filter((note) => note.id !== id);
     // console.log({newNotes,id})
