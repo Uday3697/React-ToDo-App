@@ -1,3 +1,10 @@
+.main{
+  top: 0;
+  z-index: 1;
+  position: sticky;
+  position: -webkit-sticky;
+
+}
 .new {
   background-color:rgb(127, 119, 250);
   margin-bottom: 10px;
@@ -20,6 +27,7 @@ textarea {
   resize: none;
   background-color:rgb(127, 119, 250);
   color: white;
+  font-size: large;
 }
 textarea:focus {
   outline: none;

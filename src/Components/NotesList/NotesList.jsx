@@ -13,7 +13,7 @@ function NotesList({ notes}) {
   }=useContext(GlobalContext)
   return (
     <div className="notes-list">
-      <AddNote  />
+      
       {notes.map((note) => {
         return (
           <Note

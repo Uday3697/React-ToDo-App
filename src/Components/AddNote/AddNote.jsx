@@ -2,7 +2,7 @@ import React,{useContext} from 'react';
 import './AddNote.css'
 import { useState } from 'react';
 import {GlobalContext} from "../../globalContext"
-const AddNote = () => {
+const AddNote = ({setToggle}) => {
     const charLimit=400;
     const [noteText, setNoteText] = useState('');
     const handleChange=(event)=>{
@@ -15,6 +15,7 @@ const AddNote = () => {
         if(noteText.trim().length >0 ){
             addNote(noteText);
             setNoteText('')
+      
         }
     }
     const {
@@ -24,6 +25,7 @@ const AddNote = () => {
       }=useContext(GlobalContext)
     
   return (
+    <div className="main">
     <div className="new">
         <textarea cols="10" rows="12"
         placeholder='Type Here To Add Note...'
@@ -34,6 +36,7 @@ const AddNote = () => {
             <small>{charLimit-noteText.length} Remanining</small>
             <button className='save' onClick={handleClick}>Save</button>
         </div>
+    </div>
     </div>
     
   )

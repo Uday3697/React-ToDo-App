@@ -5,6 +5,7 @@ import Search from "./Components/Search/Search";
 import Header from "./Components/Header/Header";
 
 import {GlobalContext} from './globalContext'
+import AddNote from "./Components/AddNote/AddNote";
 
 function App() {
   const [notes, setNotes] = useState([...JSON.parse(localStorage.getItem("react-notes-app-data") || "[]")]);
@@ -19,6 +20,8 @@ function App() {
     };
     const newNotes = [...notes, newNote];
     setNotes(newNotes);
+    setToggle(!toggle)
+
   };
   const deleteNote = (id) => {
     const newNotes = notes.filter((note) => note.id !== id);
@@ -48,6 +51,12 @@ function App() {
     addNote,
     deleteNote,
     setSearchText,
+     
+  }
+  const [toggle, setToggle] = useState(false);
+  console.log(toggle)
+  const toggleHandler=()=>{
+    setToggle(!toggle)
   }
 
   return (
@@ -55,13 +64,18 @@ function App() {
       <GlobalContext.Provider value={value}>
       <Header />
       <Search  />
+      
       <NotesList
         notes={notes.filter((note) =>
           note.text.toLowerCase().includes(searchText)
         )}
   
       />
-      <button className="floating-button">+</button>
+      {toggle && (
+        <AddNote  />
+      )}
+      <button className="floating-button" onClick={toggleHandler}>+</button>
+      
       </GlobalContext.Provider>
     </div>
   );
