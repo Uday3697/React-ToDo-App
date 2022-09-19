@@ -1,23 +1,28 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import './AddNote.css'
 import { useState } from 'react';
-
-const AddNote = ({handleAddNote}) => {
+import {GlobalContext} from "../../globalContext"
+const AddNote = () => {
     const charLimit=400;
-    const [noteText, setNoteText] = useState(' ');
-    const handleChange=(e)=>{
-        // console.log(e.target.value)
-        if(charLimit-e.target.value.length >=0){
-            setNoteText(e.target.value)
+    const [noteText, setNoteText] = useState('');
+    const handleChange=(event)=>{
+        if(charLimit-event.target.value.length>=0){
+            setNoteText(event.target.value)
         }
         
     }
     const handleClick=()=> {
-        if(noteText.trim().length > 0 ){
-            handleAddNote(noteText);
+        if(noteText.trim().length >0 ){
+            addNote(noteText);
             setNoteText('')
         }
     }
+    const {
+        searchText,
+        addNote,
+        deleteNote,
+      }=useContext(GlobalContext)
+    
   return (
     <div className="new">
         <textarea cols="10" rows="12"

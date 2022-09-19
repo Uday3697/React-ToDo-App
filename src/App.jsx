@@ -1,29 +1,19 @@
 import "./App.css";
 import NotesList from "./Components/NotesList/NotesList";
 import { useEffect, useState } from "react";
-import { nanoid } from "nanoid";
 import Search from "./Components/Search/Search";
 import Header from "./Components/Header/Header";
 
+import {GlobalContext} from './globalContext'
+
 function App() {
-  const [notes, setNotes] = useState([
-    {
-      id: nanoid(),
-      text: "my first note",
-      date: "15/09/2022",
-    },
-    {
-      id: nanoid(),
-      text: "My second Note",
-      date: "15/09/2022",
-    },
-   
-  ]);
+  const [notes, setNotes] = useState([...JSON.parse(localStorage.getItem("react-notes-app-data") || "[]")]);
   const addNote = (text) => {
-    console.log(text);
+    // console.log(text);
     const date = new Date();
     const newNote = {
-      id: nanoid(),
+    
+      id:date.getTime(),
       text: text,
       date: date.toLocaleDateString(),
     };
@@ -32,35 +22,47 @@ function App() {
   };
   const deleteNote = (id) => {
     const newNotes = notes.filter((note) => note.id !== id);
+    // console.log({newNotes,id})
     setNotes(newNotes);
+    return "Note Deleted!" ;
   };
 
   //Search In Notes
   const [searchText, setSearchText] = useState('');
-
+ 
   //save to local storage
   useEffect(() => {
-    localStorage.setItem("react-notes-app-data", JSON.stringify(notes));
+    window.localStorage.setItem("react-notes-app-data", JSON.stringify(notes));
   },[notes]);
 
   useEffect(() => {
-    const savedNotes = JSON.parse(localStorage.getItem("react-notes-app-data"));
+    const savedNotes = JSON.parse(window.localStorage.getItem("react-notes-app-data"));
+    console.log({savedNotes})
     if (savedNotes) {
       setNotes(savedNotes); 
     }
   }, []);
 
+  const value={
+    searchText,
+    addNote,
+    deleteNote,
+    setSearchText,
+  }
+
   return (
     <div className="main-container">
+      <GlobalContext.Provider value={value}>
       <Header />
-      <Search handleSearchNote={searchText} />
+      <Search  />
       <NotesList
         notes={notes.filter((note) =>
           note.text.toLowerCase().includes(searchText)
         )}
-        handleAddNote={addNote}
-        handleDeleteNote={deleteNote}
+  
       />
+      <button className="floating-button">+</button>
+      </GlobalContext.Provider>
     </div>
   );
 }
