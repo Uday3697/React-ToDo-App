@@ -1,15 +1,57 @@
-.note{
-    background-color: rgb(228, 228, 77);
-    margin-bottom: 10px;
-    border-radius: 10px;
-    padding: 1rem;
-    min-height: 170px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.note {
+  /* background-color: rgb(114, 161, 250); */
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 1rem;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0px 4px 4px rgb(0 0 0/25);
+  background: rgb(24, 21, 15);
+  text-shadow: 2px 2px 5px black;
+  font-style: italic;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  /* color: white; */
+
+  background: linear-gradient(
+    90deg,
+    hsla(40, 94%, 74%, 1) 0%,
+    rgb(131, 187, 252) 100%
+  );
+
+  background: -moz-linear-gradient(
+    90deg,
+    hsla(40, 94%, 74%, 1) 0%,
+    hsla(60, 89%, 72%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    90deg,
+    hsla(40, 94%, 74%, 1) 0%,
+    hsla(60, 89%, 72%, 1) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#FBD07C", endColorstr="#F7F779", GradientType=1 );
 }
-.note-footer{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.note:hover {
+  transform: scaleX(1.05);
+  transition: 0.4s all ease;
+}
+.delete-icon {
+  border: 1px solid red;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgb(0 0 0/25);
+  
+}
+.delete-icon:hover {
+  transform: scale(1.5);
+
+  cursor: pointer;
 }
