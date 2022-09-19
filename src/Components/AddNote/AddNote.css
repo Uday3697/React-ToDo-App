@@ -11,7 +11,7 @@
   text-shadow: 2px 2px 5px red;
   font-style: italic;
 }
-.note.new:hover {
+.new:hover {
   transform: scaleX(1.05);
   transition: 0.4s all ease;
 }

@@ -1,6 +1,6 @@
 import "./App.css";
 import NotesList from "./Components/NotesList/NotesList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import Search from "./Components/Search/Search";
 import Header from "./Components/Header/Header";
@@ -9,19 +9,15 @@ function App() {
   const [notes, setNotes] = useState([
     {
       id: nanoid(),
-      text: "this is notes 1",
+      text: "my first note",
       date: "15/09/2022",
     },
     {
       id: nanoid(),
-      text: "this is notes second note",
+      text: "My second Note",
       date: "15/09/2022",
     },
-    {
-      id: nanoid(),
-      text: "this is third note",
-      date: "15/09/2022",
-    },
+   
   ]);
   const addNote = (text) => {
     console.log(text);
@@ -39,18 +35,32 @@ function App() {
     setNotes(newNotes);
   };
 
-  //Search In Notes 
+  //Search In Notes
   const [searchText, setSearchText] = useState('');
+
+  //save to local storage
+  useEffect(() => {
+    localStorage.setItem("react-notes-app-data", JSON.stringify(notes));
+  },[notes]);
+
+  useEffect(() => {
+    const savedNotes = JSON.parse(localStorage.getItem("react-notes-app-data"));
+    if (savedNotes) {
+      setNotes(savedNotes); 
+    }
+  }, []);
 
   return (
     <div className="main-container">
-      <Header/>
-      <Search handleSearchNote={searchText}/>
+      <Header />
+      <Search handleSearchNote={searchText} />
       <NotesList
-        notes={notes.filter((note)=> note.text.toLowerCase().includes(searchText))}
+        notes={notes.filter((note) =>
+          note.text.toLowerCase().includes(searchText)
+        )}
         handleAddNote={addNote}
         handleDeleteNote={deleteNote}
-      /> 
+      />
     </div>
   );
 }
